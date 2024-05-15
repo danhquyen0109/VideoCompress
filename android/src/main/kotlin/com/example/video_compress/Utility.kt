@@ -97,15 +97,15 @@ class Utility(private val channelName: String) {
 
         if (bitmap == null) result.success(emptyArray<Int>())
 
-        val width = bitmap!!.width
-        val height = bitmap.height
-        val max = Math.max(width, height)
-        if (max > 512) {
-            val scale = 512f / max
-            val w = Math.round(scale * width)
-            val h = Math.round(scale * height)
-            bitmap = Bitmap.createScaledBitmap(bitmap, w, h, true)
-        }
+        // val width = bitmap!!.width
+        // val height = bitmap.height
+        // val max = Math.max(width, height)
+        // if (max > 512) {
+        //     val scale = 512f / max
+        //     val w = Math.round(scale * width)
+        //     val h = Math.round(scale * height)
+        //     bitmap = Bitmap.createScaledBitmap(bitmap, w, h, true)
+        // }
 
         return bitmap!!
     }
