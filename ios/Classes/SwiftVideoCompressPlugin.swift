@@ -65,13 +65,16 @@ public class SwiftVideoCompressPlugin: NSObject, FlutterPlugin {
         assetImgGenerate.appliesPreferredTrackTransform = true
         
         let timeScale = CMTimeScale(track.nominalFrameRate)
-        let time = CMTimeMakeWithSeconds(Float64(truncating: position),preferredTimescale: timeScale)
+        let positionInMilliseconds = Float64(truncating: position)
+        let positionInSeconds = positionInMilliseconds / 1000.0
+        
+        let time = CMTime(seconds: positionInSeconds, preferredTimescale: timeScale)
         guard let img = try? assetImgGenerate.copyCGImage(at:time, actualTime: nil) else {
             return nil
         }
         let thumbnail = UIImage(cgImage: img)
-        let compressionQuality = CGFloat(0.01 * Double(truncating: quality))
-        return thumbnail.jpegData(compressionQuality: compressionQuality)
+        // let compressionQuality = CGFloat(0.01 * Double(truncating: quality))
+        return thumbnail.jpegData(compressionQuality: 1.0)
     }
     
     private func getByteThumbnail(_ path: String,_ quality: NSNumber,_ position: NSNumber,_ result: FlutterResult) {

@@ -82,7 +82,7 @@ class Utility(private val channelName: String) {
 
         try {
             retriever.setDataSource(path)
-            bitmap = retriever.getFrameAtTime(position, MediaMetadataRetriever.OPTION_CLOSEST_SYNC)
+            bitmap = retriever.getFrameAtTime(position * 1000, MediaMetadataRetriever.OPTION_CLOSEST_SYNC)
         } catch (ex: IllegalArgumentException) {
             result.error(channelName, "Assume this is a corrupt video file", null)
         } catch (ex: RuntimeException) {
